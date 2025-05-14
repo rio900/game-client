@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotStriker.Integration</name>
+    </assembly>
+    <members>
+        <member name="T:DotStriker.Integration.Client.BaseClient">
+            <summary>
+            Base client
+            </summary>
+        </member>
+        <member name="P:DotStriker.Integration.Client.BaseClient.Alice">
+            <summary>
+            Alice account
+            </summary>
+        </member>
+        <member name="P:DotStriker.Integration.Client.BaseClient.ExtrinsicManager">
+            <summary>
+            Extrinsic manager, used to manage extrinsic subscriptions and the corresponding states.
+            </summary>
+        </member>
+        <member name="P:DotStriker.Integration.Client.BaseClient.SubscriptionManager">
+            <summary>
+            Subscription manager, used to manage subscriptions of storage elements.
+            </summary>
+        </member>
+        <member name="P:DotStriker.Integration.Client.BaseClient.SubstrateClient">
+            <summary>
+            Substrate Extension Client
+            </summary>
+        </member>
+        <member name="P:DotStriker.Integration.Client.BaseClient.IsConnected">
+            <summary>
+            Is connected to the network
+            </summary>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.#ctor(System.String,System.Int32)">
+            <summary>
+            Base Client Constructor
+            </summary>
+            <param name="url"></param>
+            <param name="maxConcurrentCalls"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.ConnectAsync(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Connect to the network
+            </summary>
+            <param name="useMetadata"></param>
+            <param name="standardSubstrate"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.DisconnectAsync">
+            <summary>
+            Disconnect from the network
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.CanExtrinsic(System.String,System.Int32)">
+            <summary>
+            Check if extrinsic can be sent
+            </summary>
+            <param name="extrinsicType"></param>
+            <param name="concurrentTasks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.HasMaxConcurentTaskRunning">
+            <summary>
+            Check if we have maximum of concurrent tasks running reached
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.HasToManyConcurentTaskRunning(System.String,System.Int32)">
+            <summary>
+            Check if we have maximum of concurrent tasks running reached
+            </summary>
+            <param name="extrinsicType"></param>
+            <param name="concurrentTasks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.GenericExtrinsicAsync(Substrate.NetApi.Model.Types.Account,System.String,Substrate.NetApi.Model.Extrinsics.Method,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Generic extrinsic sender
+            </summary>
+            <param name="extrinsicType"></param>
+            <param name="extrinsicMethod"></param>
+            <param name="concurrentTasks"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.ActionExtrinsicUpdate(System.String,Substrate.NetApi.Model.Rpc.TransactionEventInfo)">
+            <summary>
+            Callback for extrinsic update
+            </summary>
+            <param name="subscriptionId"></param>
+            <param name="extrinsicUpdate"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.SubscribeEventsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to event storage
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.BaseClient.RandomAccount(System.Int32,System.String,Substrate.NetApi.Model.Types.KeyType)">
+            <summary>
+            Generate a random account
+            </summary>
+            <param name="seed"></param>
+            <param name="derivationPsw"></param>
+            <param name="keyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Extrinsic manager
+            </summary>
+            <param name="extrinsicTimeOut"></param>
+            <param name="retentationTime"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.TryAdd(System.String,System.String)">
+            <summary>
+            Try to add a new extrinsic to the manager.
+            </summary>
+            <param name="subscription"></param>
+            <param name="extrinsicType"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.TryGet(System.String,DotStriker.Integration.Client.ExtrinsicInfo@)">
+            <summary>
+            Get extrinsic info by subscriptionId.
+            </summary>
+            <param name="id"></param>
+            <param name="extrinsicInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.UpdateExtrinsicInfo(System.String,Substrate.NetApi.Model.Rpc.TransactionEventInfo)">
+            <summary>
+            Update extrinsic info.
+            </summary>
+            <param name="subscriptionId"></param>
+            <param name="extrinsicUpdate"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.CleanUp(System.Boolean)">
+            <summary>
+            Clean up completed and time outed extrinsics.
+            </summary>
+            <param name="timeOut"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.UpdateExtrinsicEvents(System.String,System.Collections.Generic.IEnumerable{DotStriker.NetApiExt.Generated.Model.frame_system.EventRecord})">
+            <summary>
+            Update extrinsic events.
+            </summary>
+            <param name="subscriptionId"></param>
+            <param name="allExtrinsicEvents"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.UpdateExtrinsicError(System.String,System.String)">
+            <summary>
+            Update extrinsic error.
+            </summary>
+            <param name="subscriptionId"></param>
+            <param name="errorMsg"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.ExtrinsicManager.OnExtrinsicUpdated(System.String,DotStriker.Integration.Client.ExtrinsicInfo)">
+            <summary>
+            Simple extrinsic tester
+            </summary>
+            <param name="subscriptionId"></param>
+            <param name="queueInfo"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:DotStriker.Integration.Client.SubscriptionManager.ActionSubscrptionEvent(System.String,Substrate.NetApi.Model.Rpc.StorageChangeSet)">
+            <summary>
+            Simple extrinsic tester
+            </summary>
+            <param name="subscriptionId"></param>
+            <param name="storageChangeSet"></param>
+        </member>
+        <member name="M:DotStriker.Integration.Client.SubscriptionManager.OnSystemEvents(System.String,Substrate.NetApi.Model.Rpc.StorageChangeSet)">
+            <summary>
+            Handle system events
+            </summary>
+            <param name="subscriptionId"></param>
+            <param name="storageChangeSet"></param>
+        </member>
+    </members>
+</doc>
