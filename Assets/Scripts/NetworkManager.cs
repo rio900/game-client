@@ -17,6 +17,8 @@ using TMPro;
 using Unity.VisualScripting;
 using Substrate.NetApi.Model.Types.Base;
 using DotStriker.NetApiExt.Generated.Model.pallet_template;
+using DotStriker.NetApiExt.Generated.Model.sp_core.crypto;
+using DotStriker.Integration.Helper;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -41,12 +43,16 @@ public class NetworkManager : MonoBehaviour
     [SerializeField]
     GameObject _asteroidPrefab;
 
+    [SerializeField]
+    GameObject _starshipPrefab;
+
     SubstrateClientExt _client;
     Account _ownerAccount;
 
     int _updateNumber = 0;
 
     Dictionary<long, Coord> _asteroids = new Dictionary<long, Coord>();
+    Dictionary<string, ShipEntity> _shipsInSpace = new Dictionary<string, ShipEntity>();
 
     List<GameObject> _asteroidObjects = new List<GameObject>();
 
@@ -74,7 +80,8 @@ public class NetworkManager : MonoBehaviour
         }
 
         var block = await _client.Chain.GetBlockAsync(CancellationToken.None);
-        _blockNumberText.text = "Block number: " + block.Block.Header.Number.ToString();
+        var blockNumber = block.Block.Header.Number;
+        _blockNumberText.text = "Block number: " + blockNumber;
 
         Debug.Log($"[NetworkManager] [UpdateState] Starting to get events");
         var events = await _client.SystemStorage.Events(null, CancellationToken.None);
@@ -115,6 +122,40 @@ public class NetworkManager : MonoBehaviour
 
                         Debug.Log($"Destroyed resource at {tuple3}");
                         break;
+
+                    case Event.FlightStarted:
+                        // tuple4: (AccountId, Coord from, Coord to, U32 endBlock)
+                        var tuple4 = templateEvent.Value2 as BaseTuple<AccountId32, Coord, Coord, U32>;
+
+                        var owner = (tuple4.Value[0] as AccountId32).ToAddress();
+                        var from = tuple4.Value[1] as Coord;
+                        var to = tuple4.Value[2] as Coord;
+                        var end = (tuple4.Value[3] as U32).ConvertTo<int>();
+
+                        if (_shipsInSpace.ContainsKey(owner.ToString()))
+                        {
+                            var ship = _shipsInSpace[owner.ToString()];
+                            ship.Lounch(from.ToVector3(),
+                                                                     to.ToVector3(),
+                                                                     blockNumber.ConvertTo<int>(),
+                                                                     end);
+                        }
+                        else
+                        {
+                            var ship = Instantiate(_starshipPrefab, from.ToVector3(), Quaternion.identity);
+                            ship.name = owner.ToString();
+                            var shipEntity = ship.GetComponent<ShipEntity>();
+                            shipEntity.Lounch(from.ToVector3(), to.ToVector3(),
+                                                                     blockNumber.ConvertTo<int>(),
+                                                                     end);
+                            _shipsInSpace.Add(owner.ToString(), shipEntity);
+                        }
+
+
+                        Debug.Log($"[NetworkManager] [FlightStarted] {owner?.ToString()} from {from?.X},{from?.Y} to {to?.X},{to?.Y}, ends at {end}");
+
+                        break;
+
                 }
             }
         }
@@ -166,16 +207,20 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    public async void OnClickTest()
+    public async void LounchStarship(Vector2 coord)
     {
-        Debug.Log("[NetworkManager] [OnClick] OnClickTest");
+        Debug.Log("[NetworkManager] [LounchStarship] " + coord);
 
-        await CallDoSomethingAsync();
+        await CallDoSomethingAsync(coord);
     }
 
-    public async Task CallDoSomethingAsync()
+    public async Task CallDoSomethingAsync(Vector2 coord)
     {
-        var value = new U32(42);
+        var value = new Coord()
+        {
+            X = new U32((uint)coord.x),
+            Y = new U32((uint)coord.y)
+        };
 
         Method method = DotStriker.NetApiExt.Generated.Storage.TemplateCalls.DoSomething(value);
 
@@ -193,4 +238,18 @@ public class NetworkManager : MonoBehaviour
 
         Debug.Log($"[NetworkManager] Submitted: {subscriptionId}");
     }
+
+    internal void OwnerShipLounch(Vector2 coord)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public static class CalculationHelper
+{
+    public static Vector3 ToVector3(this Coord coord)
+    {
+        return new Vector3(coord.X.ConvertTo<float>(), 0, coord.Y.ConvertTo<float>());
+    }
+
 }

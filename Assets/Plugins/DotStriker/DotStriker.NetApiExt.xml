@@ -414,7 +414,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_metadata_hash_extension.CheckMetadataHash">
             <summary>
-            >> 138 - Composite[frame_metadata_hash_extension.CheckMetadataHash]
+            >> 139 - Composite[frame_metadata_hash_extension.CheckMetadataHash]
             </summary>
         </member>
         <member name="P:DotStriker.NetApiExt.Generated.Model.frame_metadata_hash_extension.CheckMetadataHash.Mode">
@@ -448,7 +448,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_metadata_hash_extension.EnumMode">
             <summary>
-            >> 139 - Variant[frame_metadata_hash_extension.Mode]
+            >> 140 - Variant[frame_metadata_hash_extension.Mode]
             </summary>
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_support.dispatch.DispatchClass">
@@ -804,7 +804,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_genesis.CheckGenesis">
             <summary>
-            >> 132 - Composite[frame_system.extensions.check_genesis.CheckGenesis]
+            >> 133 - Composite[frame_system.extensions.check_genesis.CheckGenesis]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_genesis.CheckGenesis.TypeName">
@@ -818,7 +818,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_mortality.CheckMortality">
             <summary>
-            >> 133 - Composite[frame_system.extensions.check_mortality.CheckMortality]
+            >> 134 - Composite[frame_system.extensions.check_mortality.CheckMortality]
             </summary>
         </member>
         <member name="P:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_mortality.CheckMortality.Value">
@@ -837,7 +837,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_nonce.CheckNonce">
             <summary>
-            >> 135 - Composite[frame_system.extensions.check_nonce.CheckNonce]
+            >> 136 - Composite[frame_system.extensions.check_nonce.CheckNonce]
             </summary>
         </member>
         <member name="P:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_nonce.CheckNonce.Value">
@@ -856,7 +856,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_non_zero_sender.CheckNonZeroSender">
             <summary>
-            >> 129 - Composite[frame_system.extensions.check_non_zero_sender.CheckNonZeroSender]
+            >> 130 - Composite[frame_system.extensions.check_non_zero_sender.CheckNonZeroSender]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_non_zero_sender.CheckNonZeroSender.TypeName">
@@ -870,7 +870,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_spec_version.CheckSpecVersion">
             <summary>
-            >> 130 - Composite[frame_system.extensions.check_spec_version.CheckSpecVersion]
+            >> 131 - Composite[frame_system.extensions.check_spec_version.CheckSpecVersion]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_spec_version.CheckSpecVersion.TypeName">
@@ -884,7 +884,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_tx_version.CheckTxVersion">
             <summary>
-            >> 131 - Composite[frame_system.extensions.check_tx_version.CheckTxVersion]
+            >> 132 - Composite[frame_system.extensions.check_tx_version.CheckTxVersion]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_tx_version.CheckTxVersion.TypeName">
@@ -898,7 +898,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_weight.CheckWeight">
             <summary>
-            >> 136 - Composite[frame_system.extensions.check_weight.CheckWeight]
+            >> 137 - Composite[frame_system.extensions.check_weight.CheckWeight]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.check_weight.CheckWeight.TypeName">
@@ -912,7 +912,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.weight_reclaim.WeightReclaim">
             <summary>
-            >> 140 - Composite[frame_system.extensions.weight_reclaim.WeightReclaim]
+            >> 141 - Composite[frame_system.extensions.weight_reclaim.WeightReclaim]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.frame_system.extensions.weight_reclaim.WeightReclaim.TypeName">
@@ -2130,6 +2130,40 @@
         <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Coord.Decode(System.Byte[],System.Int32@)">
             <inheritdoc/>
         </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight">
+            <summary>
+            >> 124 - Composite[pallet_template.Flight]
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.From">
+            <summary>
+            >> from
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.To">
+            <summary>
+            >> to
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.Start">
+            <summary>
+            >> start
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.End">
+            <summary>
+            >> end
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call">
             <summary>
             >> Call
@@ -2215,7 +2249,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumError">
             <summary>
-            >> 124 - Variant[pallet_template.pallet.Error]
+            >> 125 - Variant[pallet_template.pallet.Error]
             Errors that can be returned by this pallet.
             
             Errors tell users that something went wrong so it's important that their naming is
@@ -2253,6 +2287,11 @@
         <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.AsteroidRemoved">
             <summary>
             >> AsteroidRemoved
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.FlightStarted">
+            <summary>
+            >> FlightStarted
             </summary>
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumEvent">
@@ -2311,7 +2350,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_transaction_payment.ChargeTransactionPayment">
             <summary>
-            >> 137 - Composite[pallet_transaction_payment.ChargeTransactionPayment]
+            >> 138 - Composite[pallet_transaction_payment.ChargeTransactionPayment]
             </summary>
         </member>
         <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_transaction_payment.ChargeTransactionPayment.Value">
@@ -2503,7 +2542,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.Runtime">
             <summary>
-            >> 142 - Composite[solochain_template_runtime.Runtime]
+            >> 143 - Composite[solochain_template_runtime.Runtime]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.Runtime.TypeName">
@@ -2815,7 +2854,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.sp_runtime.EnumMultiSignature">
             <summary>
-            >> 126 - Variant[sp_runtime.MultiSignature]
+            >> 127 - Variant[sp_runtime.MultiSignature]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.sp_runtime.EnumMultiSignature.#ctor">
@@ -4249,7 +4288,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.sp_runtime.generic.era.EnumEra">
             <summary>
-            >> 134 - Variant[sp_runtime.generic.era.Era]
+            >> 135 - Variant[sp_runtime.generic.era.Era]
             </summary>
         </member>
         <member name="M:DotStriker.NetApiExt.Generated.Model.sp_runtime.generic.era.EnumEra.#ctor">
@@ -4259,7 +4298,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic">
             <summary>
-            >> 125 - Composite[sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic]
+            >> 126 - Composite[sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic]
             </summary>
         </member>
         <member name="P:DotStriker.NetApiExt.Generated.Model.sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic.Value">
@@ -5824,12 +5863,44 @@
             >> Asteroids
             </summary>
         </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.FlightsParams(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> FlightsParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.FlightsDefault">
+            <summary>
+            >> FlightsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.Flights(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> Flights
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.ActiveShipsParams(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> ActiveShipsParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.ActiveShipsDefault">
+            <summary>
+            >> ActiveShipsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.ActiveShips(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> ActiveShips
+            </summary>
+        </member>
         <member name="T:DotStriker.NetApiExt.Generated.Storage.TemplateCalls">
             <summary>
             >> TemplateCalls
             </summary>
         </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.DoSomething(Substrate.NetApi.Model.Types.Primitive.U32)">
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.DoSomething(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord)">
             <summary>
             >> do_something
             The pallet's dispatchable functions ([`Call`]s).
@@ -6194,7 +6265,7 @@
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Types.Base.Arr65U8">
             <summary>
-            >> 127 - Array
+            >> 128 - Array
             </summary>
         </member>
         <member name="P:DotStriker.NetApiExt.Generated.Types.Base.Arr65U8.Value">
