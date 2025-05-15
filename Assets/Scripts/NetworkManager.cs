@@ -165,4 +165,32 @@ public class NetworkManager : MonoBehaviour
             _debugInfoPanel.SetActive(false);
         }
     }
+
+    public async void OnClickTest()
+    {
+        Debug.Log("[NetworkManager] [OnClick] OnClickTest");
+
+        await CallDoSomethingAsync();
+    }
+
+    public async Task CallDoSomethingAsync()
+    {
+        var value = new U32(42);
+
+        Method method = DotStriker.NetApiExt.Generated.Storage.TemplateCalls.DoSomething(value);
+
+        string subscriptionId = await _client.TransactionWatchCalls.TransactionWatchV1SubmitAndWatchAsync(
+            (status, info) =>
+            {
+                var result = $"[NetworkManager] CallDoSomethingAsync Status: {status}, Events: {info?.ToString()}";
+                Debug.Log(result);
+            },
+            method,
+            GetAccount(),
+            ChargeTransactionPayment.Default(),
+            64
+        );
+
+        Debug.Log($"[NetworkManager] Submitted: {subscriptionId}");
+    }
 }
