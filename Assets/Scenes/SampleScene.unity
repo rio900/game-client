@@ -395,6 +395,8 @@ MonoBehaviour:
   _updateNumberText: {fileID: 995027994}
   _numberInsideTestEventText: {fileID: 1835932374}
   _debugInfoPanel: {fileID: 89336323}
+  _asteroidPrefab: {fileID: 341059478644670315, guid: f5428793a2e294d728285cd745ef2f4a,
+    type: 3}
 --- !u!4 &311364259
 Transform:
   m_ObjectHideFlags: 0

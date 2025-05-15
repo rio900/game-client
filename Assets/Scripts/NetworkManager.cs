@@ -15,6 +15,8 @@ using System.Linq;
 using Substrate.NetApi.Model.Types.Primitive;
 using TMPro;
 using Unity.VisualScripting;
+using Substrate.NetApi.Model.Types.Base;
+using DotStriker.NetApiExt.Generated.Model.pallet_template;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -36,10 +38,17 @@ public class NetworkManager : MonoBehaviour
     [SerializeField]
     GameObject _debugInfoPanel;
 
+    [SerializeField]
+    GameObject _asteroidPrefab;
+
     SubstrateClientExt _client;
     Account _ownerAccount;
 
     int _updateNumber = 0;
+
+    Dictionary<long, Coord> _asteroids = new Dictionary<long, Coord>();
+
+    List<GameObject> _asteroidObjects = new List<GameObject>();
 
     async void Start()
     {
@@ -88,7 +97,42 @@ public class NetworkManager : MonoBehaviour
 
                         Debug.Log($"[NetworkManager] [UpdateState] TestEvent {tuple1}");
                         break;
+
+                    case Event.AsteroidSpawned:
+                        var tuple2 = templateEvent.Value2 as BaseTuple<U64, Coord>;
+
+                        var key = (tuple2?.Value[0] as U64).ConvertTo<long>();
+                        if (!_asteroids.ContainsKey(key))
+                            _asteroids.Add(key, tuple2?.Value[1] as Coord);
+
+                        Debug.Log($"Spawned resource at {tuple2?.Value[0]} with id {tuple2?.Value[1]}");
+                        break;
+                    case Event.AsteroidRemoved:
+                        var tuple3 = templateEvent.Value2 as U64;
+                        var id = tuple3.ConvertTo<long>();
+                        if (_asteroids.ContainsKey(id))
+                            _asteroids.Remove(id);
+
+                        Debug.Log($"Destroyed resource at {tuple3}");
+                        break;
                 }
+            }
+        }
+
+        // That’s also terrible
+        // I’m really sorry, please forgive me
+        // I just want to display the asteroids as soon as possible
+        _asteroidObjects.ForEach(x => Destroy(x));
+        foreach (var item in _asteroids)
+        {
+            var id = item.Key;
+            var coord = item.Value;
+
+            if (coord != null)
+            {
+                var asteroid = Instantiate(_asteroidPrefab, new Vector3(coord.X.ConvertTo<float>(), 0, coord.Y.ConvertTo<float>()), Quaternion.identity);
+                asteroid.name = id.ToString();
+                _asteroidObjects.Add(asteroid);
             }
         }
     }
