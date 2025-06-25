@@ -23,7 +23,7 @@ using DotStriker.Integration.Helper;
 public class NetworkManager : MonoBehaviour
 {
     public string Url => "ws://127.0.0.1:9944";
-
+    // public string Url => "ws://104.225.143.227:9944";
 
     [SerializeField]
     TMP_Text _nodeUrlText;
@@ -46,19 +46,27 @@ public class NetworkManager : MonoBehaviour
     [SerializeField]
     GameObject _starshipPrefab;
 
+    [SerializeField]
+    CameraController _cameraController;
+
+    [SerializeField]
+    EnergySlider _energySlider;
+
+
+
     SubstrateClientExt _client;
     Account _ownerAccount;
 
-    int _updateNumber = 0;
+    ulong _updateNumber = 0;
 
-    Dictionary<long, Coord> _asteroids = new Dictionary<long, Coord>();
+    Dictionary<Coord, AsteroidView> _asteroids = new Dictionary<Coord, AsteroidView>();
     Dictionary<string, ShipEntity> _shipsInSpace = new Dictionary<string, ShipEntity>();
 
-    List<GameObject> _asteroidObjects = new List<GameObject>();
+    UIManager _uiManager;
 
     async void Start()
     {
-
+        _uiManager = FindAnyObjectByType<UIManager>();
         _client = new SubstrateClientExt(new Uri(Url),
                                         ChargeTransactionPayment.Default());
 
@@ -72,6 +80,7 @@ public class NetworkManager : MonoBehaviour
     {
         _updateNumber++;
         _updateNumberText.text = "Update number: " + _updateNumber.ToString();
+
 
         if (_client == null || !_client.IsConnected)
         {
@@ -109,16 +118,28 @@ public class NetworkManager : MonoBehaviour
                         var tuple2 = templateEvent.Value2 as BaseTuple<U64, Coord>;
 
                         var key = (tuple2?.Value[0] as U64).ConvertTo<long>();
-                        if (!_asteroids.ContainsKey(key))
-                            _asteroids.Add(key, tuple2?.Value[1] as Coord);
+                        var coord = tuple2?.Value[1] as Coord;
+
+                        if (!_asteroids.ContainsKey(coord))
+                        {
+
+                            var asteroid = Instantiate(_asteroidPrefab, coord.ToVector3(), Quaternion.identity);
+                            asteroid.name = key.ToString();
+                            var asteroidView = asteroid.GetComponent<AsteroidView>();
+                            asteroidView.SetId((int)key);
+                            _asteroids.Add(coord, asteroidView);
+                        }
 
                         Debug.Log($"Spawned resource at {tuple2?.Value[0]} with id {tuple2?.Value[1]}");
                         break;
                     case Event.AsteroidRemoved:
-                        var tuple3 = templateEvent.Value2 as U64;
-                        var id = tuple3.ConvertTo<long>();
-                        if (_asteroids.ContainsKey(id))
-                            _asteroids.Remove(id);
+                        var tuple3 = templateEvent.Value2 as Coord;
+                        if (_asteroids.ContainsKey(tuple3))
+                        {
+                            Destroy(_asteroids[tuple3].gameObject);
+                            _asteroids.Remove(tuple3);
+                        }
+
 
                         Debug.Log($"Destroyed resource at {tuple3}");
                         break;
@@ -132,25 +153,8 @@ public class NetworkManager : MonoBehaviour
                         var to = tuple4.Value[2] as Coord;
                         var end = (tuple4.Value[3] as U32).ConvertTo<int>();
 
-                        if (_shipsInSpace.ContainsKey(owner.ToString()))
-                        {
-                            var ship = _shipsInSpace[owner.ToString()];
-                            ship.Lounch(from.ToVector3(),
-                                                                     to.ToVector3(),
-                                                                     blockNumber.ConvertTo<int>(),
-                                                                     end);
-                        }
-                        else
-                        {
-                            var ship = Instantiate(_starshipPrefab, from.ToVector3(), Quaternion.identity);
-                            ship.name = owner.ToString();
-                            var shipEntity = ship.GetComponent<ShipEntity>();
-                            shipEntity.Lounch(from.ToVector3(), to.ToVector3(),
-                                                                     blockNumber.ConvertTo<int>(),
-                                                                     end);
-                            _shipsInSpace.Add(owner.ToString(), shipEntity);
-                        }
-
+                        Lounche(blockNumber, owner, from, to, end);
+                        _energySlider.FillInstantly();
 
                         Debug.Log($"[NetworkManager] [FlightStarted] {owner?.ToString()} from {from?.X},{from?.Y} to {to?.X},{to?.Y}, ends at {end}");
 
@@ -159,22 +163,32 @@ public class NetworkManager : MonoBehaviour
                 }
             }
         }
+    }
 
-        // That’s also terrible
-        // I’m really sorry, please forgive me
-        // I just want to display the asteroids as soon as possible
-        _asteroidObjects.ForEach(x => Destroy(x));
-        foreach (var item in _asteroids)
+    private void Lounche(U64 blockNumber, string owner, Coord from, Coord to, int end)
+    {
+        Debug.Log($"[NetworkManager] [Lounche] {owner} from {from?.X},{from?.Y} to {to?.X},{to?.Y},{blockNumber} ends at {end}");
+
+        if (_shipsInSpace.ContainsKey(owner.ToString()))
         {
-            var id = item.Key;
-            var coord = item.Value;
+            var ship = _shipsInSpace[owner.ToString()];
+            ship.Lounch(ship.transform.position,  //from.ToVector3(),
+                                                     to.ToVector3(),
+                                                     blockNumber.ConvertTo<int>(),
+                                                     end);
 
-            if (coord != null)
-            {
-                var asteroid = Instantiate(_asteroidPrefab, new Vector3(coord.X.ConvertTo<float>(), 0, coord.Y.ConvertTo<float>()), Quaternion.identity);
-                asteroid.name = id.ToString();
-                _asteroidObjects.Add(asteroid);
-            }
+        }
+        else
+        {
+            var ship = Instantiate(_starshipPrefab, from.ToVector3(), Quaternion.identity);
+            ship.name = owner.ToString();
+            _cameraController.SetTarget(ship.transform);
+
+            var shipEntity = ship.GetComponent<ShipEntity>();
+            shipEntity.Lounch(from.ToVector3(), to.ToVector3(),
+                                                     blockNumber.ConvertTo<int>(),
+                                                     end);
+            _shipsInSpace.Add(owner.ToString(), shipEntity);
         }
     }
 
@@ -216,17 +230,28 @@ public class NetworkManager : MonoBehaviour
 
     public async Task CallDoSomethingAsync(Vector2 coord)
     {
+        var zero = new Coord()
+        {
+            X = new U32((uint)coord.x),
+            Y = new U32((uint)coord.y)
+        };
+
         var value = new Coord()
         {
             X = new U32((uint)coord.x),
             Y = new U32((uint)coord.y)
         };
 
+        //Lounche(new U64(_updateNumber), "owner", zero, value, (int)_updateNumber + 2);
+
+
         Method method = DotStriker.NetApiExt.Generated.Storage.TemplateCalls.DoSomething(value);
 
         string subscriptionId = await _client.TransactionWatchCalls.TransactionWatchV1SubmitAndWatchAsync(
             (status, info) =>
             {
+                _energySlider.FillOverTime(2.5f);
+
                 var result = $"[NetworkManager] CallDoSomethingAsync Status: {status}, Events: {info?.ToString()}";
                 Debug.Log(result);
             },
@@ -252,4 +277,9 @@ public static class CalculationHelper
         return new Vector3(coord.X.ConvertTo<float>(), 0, coord.Y.ConvertTo<float>());
     }
 
+    public static Vector3 ToV3(this Vector2 coord)
+    {
+        return new Vector3(coord.x, 0, coord.y);
+    }
 }
+

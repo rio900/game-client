@@ -7,7 +7,16 @@ public class PlaneClickDetector : MonoBehaviour
     [SerializeField]
     NetworkManager _networkManager;
 
+    [SerializeField]
+    FakeNetworkManager _fakeNetworkManager;
+
     public LayerMask planeLayer;
+
+    UIManager _uiManager;
+    public void Start()
+    {
+        _uiManager = FindAnyObjectByType<UIManager>();
+    }
 
     void Update()
     {
@@ -32,7 +41,10 @@ public class PlaneClickDetector : MonoBehaviour
 
     void OnGridTap(Vector2 coord)
     {
-        _networkManager.LounchStarship(coord);
+        _networkManager?.LounchStarship(coord);
+        _fakeNetworkManager?.LounchStarship(coord);
+
+
         Debug.Log($"Tapped at cell: {coord}");
     }
 }

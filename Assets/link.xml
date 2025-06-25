@@ -1,0 +1,8 @@
+<linker>
+    <assembly fullname="Substrate.Polkadot.NET.NetApiExt">
+        <type fullname="Substrate.Polkadot.NET.NetApiExt.Generated.Types.Base.EnumResult" preserve="all"/>
+    </assembly>
+    <assembly fullname="Substrate.NetApi">
+        <type fullname="Substrate.NetApi.Model.Types.Base.BaseEnumExt`3" preserve="all"/>
+    </assembly>
+</linker>
