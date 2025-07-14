@@ -23,47 +23,20 @@ public class AsteroidView : MonoBehaviour
     {
     }
 
-    public void SetId(int id)
+    public void SetId(int kind)
     {
         _asteroidObjects.ForEach(p => p.SetActive(false));
 
-        // NFT
-        if (id % 20 == 0)
-        {
-            _typeId = 3;
-            _asteroidObjects[3].SetActive(true);
-            Debug.Log($"NFT {_typeId} position {transform.position}");
-        }
-        else if (id % 14 == 0)
-        {
-            _typeId = 4;
-            _asteroidObjects[4].SetActive(true);
-            Debug.Log($"NFT {_typeId} position {transform.position}");
+        _typeId = kind;
 
-        }
-        else if (id % 8 == 0)
+        if (_typeId >= 0 && _typeId < _asteroidObjects.Count)
         {
-            _typeId = 5;
-            _asteroidObjects[5].SetActive(true);
-            Debug.Log($"NFT {_typeId} position {transform.position}");
-
+            _asteroidObjects[_typeId].SetActive(true);
+            Debug.Log($"[AsteroidView] Set type: {_typeId} ({kind}) at position {transform.position}");
         }
-        else if (id % 2 == 0)
-        {
-            _typeId = 0;
-            _asteroidObjects[0].SetActive(true);
-        }
-        else if (id % 3 == 0)
-        {
-            _typeId = 2;
-            _asteroidObjects[2].SetActive(true);
-        }
-
-        //--------
         else
         {
-            _typeId = 1;
-            _asteroidObjects[1].SetActive(true);
+            Debug.LogWarning($"[AsteroidView] Unknown asteroid kind: {_typeId} ({kind})");
         }
     }
 

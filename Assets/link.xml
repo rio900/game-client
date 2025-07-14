@@ -1,8 +1,6 @@
 <linker>
-    <assembly fullname="Substrate.Polkadot.NET.NetApiExt">
+    <assembly fullname="Substrate.Polkadot.NET.NetApiExt" preserve="all" ignoreIfMissing="true"><!-- Сохраняем сам generic-типа (без параметров) -->
+        <type fullname="Substrate.NetApi.Model.Types.Base.BaseEnumExt`3" preserve="all"/><!-- Сохраняем конкретный наследуемый тип -->
         <type fullname="Substrate.Polkadot.NET.NetApiExt.Generated.Types.Base.EnumResult" preserve="all"/>
-    </assembly>
-    <assembly fullname="Substrate.NetApi">
-        <type fullname="Substrate.NetApi.Model.Types.Base.BaseEnumExt`3" preserve="all"/>
     </assembly>
 </linker>

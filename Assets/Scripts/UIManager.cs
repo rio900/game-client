@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DotStriker.NetApiExt.Generated.Model.pallet_template;
 using TMPro;
 using UnityEngine;
 
@@ -21,16 +23,12 @@ public class UIManager : MonoBehaviour
     GameObject _restartPanel;
 
     int _energy = 100;
-    int _coin = 0;
+    int _coins = 0;
     float _dots = 0;
 
     void Start()
     {
-        _coin = 0; //Random.Range(0, 100);
-        _energy = 100; //Random.Range(50, 100);
-        _dots = 0; //0.01f;
-
-        _coinText.text = $"{_coin}";
+        _coinText.text = $"{_coins}";
         _energyText.text = $"{_energy}%";
         _dotText.text = $"{_dots}";
     }
@@ -49,10 +47,10 @@ public class UIManager : MonoBehaviour
     public void Reset()
     {
         _energy = 100;
-        _coin = 0;
+        _coins = 0;
         _dots = 0;
 
-        _coinText.text = $"{_coin}";
+        _coinText.text = $"{_coins}";
         _energyText.text = $"{_energy}%";
         _dotText.text = $"{_dots}";
 
@@ -67,13 +65,35 @@ public class UIManager : MonoBehaviour
         {
             _energy = 100;
         }
+        SetEnergy(energy);
+    }
+
+    public void SetEnergy(int energy)
+    {
+        _energy = energy;
+        if (_energy > 100)
+        {
+            _energy = 100;
+        }
         _energyText.text = $"{_energy}%";
+    }
+
+    public void SetCoins(int coins)
+    {
+        _coins = coins;
+        _coinText.text = $"{_coins}";
+    }
+
+    public void SetDots(int dots)
+    {
+        _dots = dots;
+        _dotText.text = $"{_dots}";
     }
 
     public void UpdateCoinAmount(int coin)
     {
-        _coin += coin;
-        _coinText.text = $"{_coin}";
+        _coins += coin;
+        SetCoins(_coins);
     }
 
 
@@ -100,5 +120,18 @@ public class UIManager : MonoBehaviour
         _dots += val;
 
         _dotText.text = _dots.ToString("0.#");
+    }
+
+    internal void SetResource(AsteroidKind item, int v)
+    {
+        switch (item)
+        {
+            case AsteroidKind.Gold:
+                SetCoins(v);
+                break;
+            case AsteroidKind.Dot0:
+                SetDots(v);
+                break;
+        }
     }
 }

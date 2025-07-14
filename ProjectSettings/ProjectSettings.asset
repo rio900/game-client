@@ -813,7 +813,8 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
@@ -829,7 +830,7 @@ PlayerSettings:
     WebGL: 1
     Windows Store Apps: 1
     XboxOne: 1
-    iPhone: 1
+    iPhone: 4
     tvOS: 1
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
