@@ -41,10 +41,7 @@ public class PlaneClickDetector : MonoBehaviour
 
     void OnGridTap(Vector2 coord)
     {
-        _networkManager?.LounchStarship(coord);
-        _fakeNetworkManager?.LounchStarship(coord);
-
-
+        _networkManager?.OnGridTap(coord);
         Debug.Log($"Tapped at cell: {coord}");
     }
 }

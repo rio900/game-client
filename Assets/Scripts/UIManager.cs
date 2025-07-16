@@ -22,6 +22,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     GameObject _restartPanel;
 
+    [SerializeField]
+    List<UINftItem> _nftItems;
+
+    [SerializeField]
+    GameObject _startGamePanel;
+
     int _energy = 100;
     int _coins = 0;
     float _dots = 0;
@@ -96,6 +102,19 @@ public class UIManager : MonoBehaviour
         SetCoins(_coins);
     }
 
+    public void SetNftCount(AsteroidKind item, int count)
+    {
+        foreach (var nftItem in _nftItems)
+        {
+            Debug.Log($"Checking NFT item: {nftItem.NftType} against {item}");
+            if (nftItem.NftType == item)
+            {
+                nftItem.SetCount(count);
+                return;
+            }
+        }
+        Debug.LogWarning($"Nft item of type {item} not found.");
+    }
 
     // Update is called once per frame
     void Update()
@@ -133,5 +152,21 @@ public class UIManager : MonoBehaviour
                 SetDots(v);
                 break;
         }
+    }
+
+    internal void ShowStartGamePanel()
+    {
+        _startGamePanel.SetActive(true);
+    }
+
+    public AsteroidKind? GetSelectedNftItems()
+    {
+        foreach (var nftItem in _nftItems)
+        {
+            if (nftItem.Selected && nftItem.Count > 0)
+                return nftItem.NftType;
+        }
+
+        return null;
     }
 }

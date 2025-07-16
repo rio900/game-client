@@ -22,10 +22,11 @@ using DotStriker.Integration.Helper;
 
 public class NetworkManager : MonoBehaviour
 {
-    public const int AccountSeed = 123456789;
-
     public string Url => "ws://127.0.0.1:9944";
     // public string Url => "ws://104.225.143.227:9944";
+
+    [SerializeField]
+    AccountComponent _account;
 
     [SerializeField]
     TMP_Text _nodeUrlText;
@@ -58,7 +59,6 @@ public class NetworkManager : MonoBehaviour
 
 
     SubstrateClientExt _client;
-    Account _ownerAccount;
 
     ulong _updateNumber = 0;
 
@@ -68,6 +68,7 @@ public class NetworkManager : MonoBehaviour
     UIManager _uiManager;
 
     GameCallsService _gameCallsService;
+    bool _isGameStarted = false;
 
     async void Start()
     {
@@ -83,7 +84,6 @@ public class NetworkManager : MonoBehaviour
         _client = new SubstrateClientExt(new Uri(Url),
                                         ChargeTransactionPayment.Default());
 
-        _gameCallsService = new GameCallsService(_client, GetAccount());
 
         _nodeUrlText.text = Url;
         await Connect();
@@ -111,7 +111,8 @@ public class NetworkManager : MonoBehaviour
         var events = await _client.SystemStorage.Events(null, CancellationToken.None);
         var toArr = events.Value.ToArray();
 
-        var accountId = GetAccount().ToAccountId32();
+        var accountId = _account.GetAccount().ToAccountId32();
+        Debug.Log($"[NetworkManager] [UpdateState] Account ID: {accountId.ToAddress()}");
         await LoadResources(accountId);
 
         //ActiveShips
@@ -212,9 +213,17 @@ public class NetworkManager : MonoBehaviour
                             _shipsInSpace.Remove(depletedOwner);
                             Debug.Log($"[NetworkManager] Energy depleted for {depletedOwner}");
                         }
+
+                        if (depletedOwner == _account.GetAccount().ToAccountId32().ToAddress())
+                        {
+                            _isGameStarted = false;
+                            ShowStartGamePanel();
+                        }
+
                         break;
 
                     case Event.GameStarted:
+                        _isGameStarted = true;
                         var gameTuple = templateEvent.Value2 as BaseTuple<AccountId32, Coord, U32>;
                         var gameOwner = (gameTuple.Value[0] as AccountId32).ToAddress();
                         var startCoord = gameTuple.Value[1] as Coord;
@@ -275,6 +284,35 @@ public class NetworkManager : MonoBehaviour
                 Debug.Log("Storage 'AccountResources' is not set yet.");
             }
         }
+    }
+
+    private async Task LoadNfts(AccountId32 accountId)
+    {
+        var resourceTypes = new List<AsteroidKind>
+        {
+            AsteroidKind.Nft0,
+            AsteroidKind.Nft1,
+            AsteroidKind.Nft2
+        };
+
+        foreach (var item in resourceTypes)
+        {
+            var asteroidKindEnum = new EnumAsteroidKind();
+            asteroidKindEnum.Create(item);
+            var energyKey = new BaseTuple<AccountId32, EnumAsteroidKind>(accountId, asteroidKindEnum);
+
+            var result = await _client.TemplateStorage.AccountResources(energyKey, null, CancellationToken.None);
+            if (result != null)
+            {
+                Debug.Log($"Storage 'AccountResources nft {item}' = {result.Value}");
+                _uiManager.SetNftCount(item, result.Value.ConvertTo<int>());
+            }
+            else
+            {
+                Debug.Log($"Storage 'AccountResources nft {item}' = 0");
+                _uiManager.SetNftCount(item, 0);
+            }
+        }
 
     }
 
@@ -300,19 +338,6 @@ public class NetworkManager : MonoBehaviour
         Debug.Log("[NetworkManager] [Connect] Connected to node");
     }
 
-    internal Account GetAccount()
-    {
-        if (_ownerAccount == null)
-        {
-            _ownerAccount = BaseClient.Alice;
-            //_ownerAccount = BaseClient.RandomAccount(AccountSeed, "test", KeyType.Sr25519);
-            Debug.Log($"[NetworkManager] Owner account: {_ownerAccount.ToAccountId32().ToAddress()}");
-        }
-
-        return _ownerAccount;
-    }
-
-
 
     public void OnDebugClick()
     {
@@ -326,8 +351,10 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    public async void LounchStarship(Vector2 coord)
+    public async void LaunchStarship(Vector2 coord)
     {
+        if (!_isGameStarted) return;
+
         Debug.Log("[NetworkManager] [LounchStarship] " + coord);
         await _gameCallsService.CallDoSomethingAsync(coord, (status) => _energySlider.FillOverTime(2.5f));
     }
@@ -335,11 +362,11 @@ public class NetworkManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("[NetworkManager] [StartGame] Starting game...");
-
         Vector2 pos = new Vector2(25, 25);
-        uint nftSkin = 0;
+        var nftSkin = _uiManager.GetSelectedNftItems() ?? 0;
+        _gameCallsService = new GameCallsService(_client, _account.GetAccount());
 
-        _gameCallsService.StartGameAsync(pos, nftSkin).ContinueWith(task =>
+        _gameCallsService.StartGameAsync(pos, (uint)nftSkin).ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
@@ -352,5 +379,60 @@ public class NetworkManager : MonoBehaviour
         });
     }
 
+    public void ShowStartGamePanel()
+    {
+        RefreshNfts();
+        _uiManager.ShowStartGamePanel();
+
+    }
+
+    public void RefreshNfts()
+    {
+        var accountId = _account.GetAccount().ToAccountId32();
+        LoadNfts(accountId).ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError($"[NetworkManager] [RefreshNfts] Error loading NFTs: {task.Exception}");
+            }
+            else
+            {
+                Debug.Log("[NetworkManager] [RefreshNfts] NFTs loaded successfully");
+            }
+        });
+    }
+
+    internal void OnGridTap(Vector2 coord)
+    {
+        var address = _account.GetAccount().ToAccountId32().ToAddress();
+        if (!_shipsInSpace.ContainsKey(address)) return;
+        var playerShip = _shipsInSpace[address];
+
+        // Calculate Manhattan distance: |x1 - x2| + |y1 - y2|
+        float dx = Math.Abs(coord.x - playerShip.transform.position.x);
+        float dy = Math.Abs(coord.y - playerShip.transform.position.z);
+        float distance = dx + dy;
+        Debug.Log($"[NetworkManager] [OnGridTap] Distance to target: {distance} playerShip.From: {playerShip.transform.position} coord: {coord}");
+        if (distance < 4f)
+        {
+            _gameCallsService.TryToCollectResourceAsync(coord).ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError($"[NetworkManager] [OnGridTap] Error collecting resource: {task.Exception}");
+                }
+                else
+                {
+                    Debug.Log("[NetworkManager] [OnGridTap] Resource collection initiated");
+                }
+            });
+            Debug.Log($"[NetworkManager] [OnGridTap] Already at {coord}, no need to launch again.");
+            return;
+        }
+        else
+        {
+            LaunchStarship(coord);
+        }
+    }
 }
 

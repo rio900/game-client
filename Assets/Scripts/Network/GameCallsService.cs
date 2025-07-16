@@ -7,6 +7,7 @@ using Substrate.NetApi.Model.Types.Primitive;
 using DotStriker.NetApiExt.Generated.Model.pallet_template;
 using DotStriker.NetApiExt.Generated.Storage;
 using System;
+using DotStriker.Integration.Helper;
 
 public class GameCallsService
 {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DotStriker.NetApiExt.Generated.Model.pallet_template;
 using UnityEngine;
 
 public class ShipEntity : MonoBehaviour
@@ -13,7 +14,12 @@ public class ShipEntity : MonoBehaviour
     [SerializeField]
     List<GameObject> _skins;
 
+    [SerializeField]
+    LineRenderer _rangeCircle;
+
     Vector3 _from;
+    public Vector3 From => _from;
+
     Vector3 _to;
     Vector3 _controlPoint;
     int _blockDifference;
@@ -46,13 +52,21 @@ public class ShipEntity : MonoBehaviour
             skin.SetActive(false);
         }
 
-        if (id >= 0 && id < _skins.Count)
+        if (id == (int)AsteroidKind.Nft0)
         {
-            _skins[id].SetActive(true);
+            _skins[1].SetActive(true);
+        }
+        else if (id == (int)AsteroidKind.Nft1)
+        {
+            _skins[2].SetActive(true);
+        }
+        else if (id == (int)AsteroidKind.Nft2)
+        {
+            _skins[3].SetActive(true);
         }
         else
         {
-            Debug.LogError($"[ShipEntity] Invalid skin ID: {id}");
+            _skins[0].SetActive(true);
         }
 
     }
@@ -86,7 +100,28 @@ public class ShipEntity : MonoBehaviour
 
     private void Update()
     {
-        if (_to == Vector3.zero) return;
+
+        if (_to == Vector3.zero)
+        {
+            if (!_rangeCircle.enabled)
+            {
+                _rangeCircle.enabled = true;
+                DrawManhattanRange(4);
+                _rangeCircle.transform.position = transform.position;
+            }
+            else
+            {
+                _rangeCircle.transform.position = transform.position; // на случай, если корабль двигается вручную
+            }
+
+            return;
+        }
+        else
+        {
+            if (_rangeCircle.enabled)
+                _rangeCircle.enabled = false;
+        }
+
         float elapsed = Time.time - _launchTime;
 
         if (Vector3.Distance(transform.position, _to) < 0.3f && _fakeNetworkManager != null)
@@ -167,6 +202,36 @@ public class ShipEntity : MonoBehaviour
         else
         {
             Debug.Log("[ShipEntity] AsteroidView не найден.");
+        }
+    }
+
+    void DrawManhattanRange(int range)
+    {
+        List<Vector3> points = new List<Vector3>();
+
+        Vector3 center = transform.position;
+
+        // Верхняя часть ромба
+        for (int dx = -range; dx <= range; dx++)
+        {
+            int dz = range - Mathf.Abs(dx);
+            points.Add(new Vector3(center.x + dx, center.y + 0.01f, center.z + dz));
+        }
+
+        // Нижняя часть ромба
+        for (int dx = range; dx >= -range; dx--)
+        {
+            int dz = -range + Mathf.Abs(dx);
+            points.Add(new Vector3(center.x + dx, center.y + 0.01f, center.z + dz));
+        }
+
+        // Замыкаем линию
+        points.Add(points[0]);
+
+        _rangeCircle.positionCount = points.Count;
+        for (int i = 0; i < points.Count; i++)
+        {
+            _rangeCircle.SetPosition(i, points[i]);
         }
     }
 }
