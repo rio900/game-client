@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     GameObject _startGamePanel;
 
+    [SerializeField]
+    TMP_Text _playerCountText;
+
     int _energy = 100;
     int _coins = 0;
     float _dots = 0;
@@ -94,6 +97,11 @@ public class UIManager : MonoBehaviour
     {
         _dots = dots;
         _dotText.text = $"{_dots}";
+    }
+
+    public void SetPlayerCount(int count)
+    {
+        _playerCountText.text = $"Player count: {count}";
     }
 
     public void UpdateCoinAmount(int coin)

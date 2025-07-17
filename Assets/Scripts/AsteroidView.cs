@@ -6,6 +6,9 @@ using UnityEngine;
 public class AsteroidView : MonoBehaviour
 {
     [SerializeField]
+    GameObject _view;
+
+    [SerializeField]
     GameObject _collectEffectPrefab;
 
     [SerializeField]
@@ -18,6 +21,8 @@ public class AsteroidView : MonoBehaviour
     int _typeId;
     public int TypeId => _typeId;
 
+    bool _isCollected = false;
+    public bool IsCollected => _isCollected;
 
     void Start()
     {
@@ -42,17 +47,20 @@ public class AsteroidView : MonoBehaviour
 
     internal void Collect()
     {
+        if (_isCollected) return;
+        _isCollected = true;
+
+        _view.SetActive(false);
+
         var collectEffect = Instantiate(_collectEffectPrefab);
         collectEffect.transform.position = transform.position;
         Destroy(collectEffect, 1f);
 
-        if (TypeId > 2)
+        if (TypeId > 4)
         {
             var nftEffect = Instantiate(_nftEffectPrefab);
             nftEffect.transform.position = transform.position;
             Destroy(nftEffect, 4f);
         }
     }
-
-
 }

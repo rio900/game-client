@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e01468d444fc4ae1b90c9b10cbf2d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _view: {fileID: 2901094848862831586}
   _collectEffectPrefab: {fileID: 3214904319157825915, guid: 077172a03f447477fa1e7ccb06400e8f,
     type: 3}
   _nftEffectPrefab: {fileID: 151010, guid: 9c4dab70de38148498818d292a7bd461, type: 3}

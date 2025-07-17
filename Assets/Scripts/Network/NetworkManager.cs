@@ -55,7 +55,8 @@ public class NetworkManager : MonoBehaviour
     [SerializeField]
     EnergySlider _energySlider;
 
-    [SerializeField] GameObject _callIndicatorPrefab;
+
+    [SerializeField] GridRenderer _gridRenderer;
 
 
     SubstrateClientExt _client;
@@ -70,16 +71,11 @@ public class NetworkManager : MonoBehaviour
     GameCallsService _gameCallsService;
     bool _isGameStarted = false;
 
+    int _mapSize = 0; // Default map size, can be adjusted later
+
     async void Start()
     {
-        for (int i = 0; i < 50; i++)
-        {
-            for (int j = 0; j < 50; j++)
-            {
-                var callIndicator = Instantiate(_callIndicatorPrefab);
-                callIndicator.transform.position = new Vector3(i, 0, j);
-            }
-        }
+
         _uiManager = FindAnyObjectByType<UIManager>();
         _client = new SubstrateClientExt(new Uri(Url),
                                         ChargeTransactionPayment.Default());
@@ -89,7 +85,44 @@ public class NetworkManager : MonoBehaviour
         await Connect();
 
         InvokeRepeating(nameof(UpdateState), 1.0f, 1.0f);
+        InvokeRepeating(nameof(UpdatePlayerCount), 3.0f, 3.0f);
     }
+
+    private async void UpdatePlayerCount()
+    {
+        if (_client == null || !_client.IsConnected)
+        {
+            Debug.Log("[NetworkManager] [UpdatePlayerCount] Client is null or disposed");
+            return;
+        }
+        var playerCount = await _client.TemplateStorage.PlayersCount(null, CancellationToken.None);
+        if (playerCount != null)
+            _uiManager.SetPlayerCount(playerCount.ConvertTo<int>());
+    }
+
+    private void Update()
+    {
+        foreach (var ship in _shipsInSpace)
+        {
+            if (!ship.Value.Idle) continue;
+
+            var position = ship.Value.transform.position;
+
+            foreach (var asteroid in _asteroids)
+            {
+                var asteroidPosition = asteroid.Key;
+                float distance = Vector2.Distance(new Vector2(position.x, position.z), asteroidPosition);
+                if (distance < 1f)
+                {
+                    asteroid.Value.Collect();
+                    var address = _account.GetAccount().ToAccountId32().ToAddress();
+                    if (address == ship.Key)
+                        _uiManager.CollectScreenEffect();
+                }
+            }
+        }
+    }
+
 
     private async void UpdateState()
     {
@@ -106,6 +139,21 @@ public class NetworkManager : MonoBehaviour
         var block = await _client.Chain.GetBlockAsync(CancellationToken.None);
         var blockNumber = block.Block.Header.Number;
         _blockNumberText.text = "Block number: " + blockNumber;
+
+        if (_mapSize == 0)
+        {
+            var mapSize = await _client.TemplateStorage.MapSize(null, CancellationToken.None);
+            if (mapSize != null)
+            {
+                _mapSize = mapSize.ConvertTo<int>();
+                Debug.Log($"[NetworkManager] [UpdateState] [mapSize] Map size: {_mapSize}");
+            }
+            else
+            {
+                _mapSize = 50; // Default map size if not set
+            }
+            _gridRenderer.Draw(_mapSize);
+        }
 
         Debug.Log($"[NetworkManager] [UpdateState] Starting to get events");
         var events = await _client.SystemStorage.Events(null, CancellationToken.None);
@@ -198,6 +246,9 @@ public class NetworkManager : MonoBehaviour
                         var end = (tuple4.Value[3] as U32).ConvertTo<int>();
                         var flightNftSkin = (tuple4.Value[4] as U32).ConvertTo<int>();
 
+                        if (!_shipsInSpace.ContainsKey(owner))
+                            CreateNewStarship(owner, from, flightNftSkin);
+
                         Lounche(blockNumber, owner, from, to, end, flightNftSkin);
                         _energySlider.FillInstantly();
 
@@ -231,23 +282,7 @@ public class NetworkManager : MonoBehaviour
 
                         if (!_shipsInSpace.ContainsKey(gameOwner))
                         {
-                            // var ship = Instantiate(_starshipPrefab, startCoord.ToVector3(), Quaternion.identity);
-                            // ship.name = gameOwner;
-                            // var entity = ship.GetComponent<ShipEntity>();
-                            // entity.Appear(startCoord.ToVector3());
-                            // _shipsInSpace[gameOwner] = entity;
-                            // _cameraController.SetTarget(ship.transform);
-
-                            var ship = Instantiate(_starshipPrefab, startCoord.ToVector3(), Quaternion.identity);
-                            ship.name = gameOwner;
-                            _cameraController.SetTarget(ship.transform);
-
-                            var shipEntity = ship.GetComponent<ShipEntity>();
-                            shipEntity.SetSkin(nftSkin.ConvertTo<int>());
-                            // shipEntity.Lounch(startCoord.ToVector3(), startCoord.ToVector3(),
-                            //                                          blockNumber.ConvertTo<int>(),
-                            //                                          0);
-                            _shipsInSpace.Add(gameOwner.ToString(), shipEntity);
+                            CreateNewStarship(gameOwner, startCoord, nftSkin.ConvertTo<int>());
                         }
 
                         Debug.Log($"[NetworkManager] GameStarted for {gameOwner} at {startCoord.X}, {startCoord.Y}");
@@ -256,6 +291,24 @@ public class NetworkManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void CreateNewStarship(string owner, Coord startCoord, int nftSkin)
+    {
+        var ship = Instantiate(_starshipPrefab, startCoord.ToVector3(), Quaternion.identity);
+        ship.name = owner;
+
+        var accountAddress = _account.GetAccount().ToAccountId32().ToAddress();
+
+        if (accountAddress == owner)
+            _cameraController.SetTarget(ship.transform);
+
+        var shipEntity = ship.GetComponent<ShipEntity>();
+        shipEntity.SetSkin(nftSkin.ConvertTo<int>());
+        // shipEntity.Lounch(startCoord.ToVector3(), startCoord.ToVector3(),
+        //                                          blockNumber.ConvertTo<int>(),
+        //                                          0);
+        _shipsInSpace.Add(owner.ToString(), shipEntity);
     }
 
     private async Task LoadResources(AccountId32 accountId)
@@ -355,28 +408,47 @@ public class NetworkManager : MonoBehaviour
     {
         if (!_isGameStarted) return;
 
+        var address = _account.GetAccount().ToAccountId32().ToAddress();
+        if (!_shipsInSpace.ContainsKey(address))
+        {
+            Debug.Log("[NetworkManager] [LaunchStarship] No ship found for the player, cannot launch.");
+            return;
+        }
+
+        var playerShip = _shipsInSpace[address];
+        if (!playerShip.Idle) return;
+
         Debug.Log("[NetworkManager] [LounchStarship] " + coord);
-        await _gameCallsService.CallDoSomethingAsync(coord, (status) => _energySlider.FillOverTime(2.5f));
+        await _gameCallsService.CallDoSomethingAsync(coord, (status) =>
+        {
+            if (playerShip.Idle)
+                _energySlider.FillOverTime(2.5f);
+        });
     }
 
     public void StartGame()
     {
         Debug.Log("[NetworkManager] [StartGame] Starting game...");
-        Vector2 pos = new Vector2(25, 25);
-        var nftSkin = _uiManager.GetSelectedNftItems() ?? 0;
         _gameCallsService = new GameCallsService(_client, _account.GetAccount());
+        var nftSkin = _uiManager.GetSelectedNftItems() ?? 0;
+
+        Vector2 pos = new Vector2(_mapSize / 2, _mapSize / 2);
+
+        _isGameStarted = true;
+        CreateNewStarship(_account.GetAccount().ToAccountId32().ToAddress(), pos.ToCoord(), (int)nftSkin);
 
         _gameCallsService.StartGameAsync(pos, (uint)nftSkin).ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
-                Debug.LogError($"[NetworkManager] [StartGame] Error starting game: {task.Exception}");
+                Debug.LogError($"[StartGame] Error starting game: {task.Exception}");
             }
             else
             {
-                Debug.Log("[NetworkManager] [StartGame] Game started successfully");
+                Debug.Log("[StartGame] Game started successfully");
             }
         });
+
     }
 
     public void ShowStartGamePanel()
@@ -404,17 +476,35 @@ public class NetworkManager : MonoBehaviour
 
     internal void OnGridTap(Vector2 coord)
     {
+        if (coord.x < 0 || coord.y < 0 || coord.x >= _mapSize || coord.y >= _mapSize)
+        {
+            Debug.LogWarning($"[NetworkManager] [OnGridTap] Tap outside map boundaries: {coord}");
+            return;
+        }
+
         var address = _account.GetAccount().ToAccountId32().ToAddress();
         if (!_shipsInSpace.ContainsKey(address)) return;
         var playerShip = _shipsInSpace[address];
+        if (!playerShip.Idle) return;
 
         // Calculate Manhattan distance: |x1 - x2| + |y1 - y2|
         float dx = Math.Abs(coord.x - playerShip.transform.position.x);
         float dy = Math.Abs(coord.y - playerShip.transform.position.z);
         float distance = dx + dy;
         Debug.Log($"[NetworkManager] [OnGridTap] Distance to target: {distance} playerShip.From: {playerShip.transform.position} coord: {coord}");
-        if (distance < 4f)
+        if (distance < 4f && _asteroids.ContainsKey(coord))
         {
+            // We need to implement this: visually hide the resource immediately after it’s clicked, 
+            // so the player sees that it’s been collected without any delay. 
+            // The actual resource reward will be granted a couple of seconds later, 
+            // once it’s confirmed. In the future, 
+            // we could add a small timer mechanic — where the resource is “mined” over 
+            // a short period after the click. The mining could succeed or fail, depending 
+            // on probability or luck.
+            var asteroidView = _asteroids[coord];
+            asteroidView.Collect();
+            _uiManager.CollectScreenEffect();
+
             _gameCallsService.TryToCollectResourceAsync(coord).ContinueWith(task =>
             {
                 if (task.IsFaulted)

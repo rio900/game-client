@@ -36,7 +36,8 @@ public class ShipEntity : MonoBehaviour
     UIManager _uiManager;
     FakeNetworkManager _fakeNetworkManager;
 
-
+    bool _idle = true;
+    public bool Idle => _idle;
 
     public void Start()
     {
@@ -113,11 +114,13 @@ public class ShipEntity : MonoBehaviour
             {
                 _rangeCircle.transform.position = transform.position; // на случай, если корабль двигается вручную
             }
-
+            _idle = true;
             return;
         }
         else
         {
+            _idle = false;
+
             if (_rangeCircle.enabled)
                 _rangeCircle.enabled = false;
         }
@@ -191,18 +194,7 @@ public class ShipEntity : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"[ShipEntity] OnTriggerEnter {other.name}");
 
-        AsteroidView asteroid = other.GetComponent<AsteroidView>();
-        if (asteroid != null)
-        {
-            Debug.Log("[ShipEntity] AsteroidView найден!");
-            // Здесь можно вызвать методы или изменить свойства компонента
-        }
-        else
-        {
-            Debug.Log("[ShipEntity] AsteroidView не найден.");
-        }
     }
 
     void DrawManhattanRange(int range)
