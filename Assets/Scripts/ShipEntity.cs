@@ -39,6 +39,8 @@ public class ShipEntity : MonoBehaviour
     bool _idle = true;
     public bool Idle => _idle;
 
+    public bool LocalPlayer { get; internal set; }
+
     public void Start()
     {
         _uiManager = GetComponent<UIManager>();
@@ -104,16 +106,20 @@ public class ShipEntity : MonoBehaviour
 
         if (_to == Vector3.zero)
         {
-            if (!_rangeCircle.enabled)
+            if (LocalPlayer)
             {
-                _rangeCircle.enabled = true;
-                DrawManhattanRange(4);
-                _rangeCircle.transform.position = transform.position;
+                if (!_rangeCircle.enabled)
+                {
+                    _rangeCircle.enabled = true;
+                    DrawManhattanRange(4);
+                    _rangeCircle.transform.position = transform.position;
+                }
+                else
+                {
+                    _rangeCircle.transform.position = transform.position; // на случай, если корабль двигается вручную
+                }
             }
-            else
-            {
-                _rangeCircle.transform.position = transform.position; // на случай, если корабль двигается вручную
-            }
+
             _idle = true;
             return;
         }

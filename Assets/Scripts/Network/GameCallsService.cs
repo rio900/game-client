@@ -20,10 +20,10 @@ public class GameCallsService
         _account = account;
     }
 
-    public async Task CallDoSomethingAsync(Vector2 coord, Action<string> callback = null)
+    public async Task CallStartFlightAsync(Vector2 coord, Action<string> callback = null)
     {
 
-        Method method = TemplateCalls.DoSomething(coord.ToCoord());
+        Method method = TemplateCalls.StartFlight(coord.ToCoord());
 
         string subscriptionId = await _client.TransactionWatchCalls.TransactionWatchV1SubmitAndWatchAsync(
             (status, info) =>

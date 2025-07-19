@@ -73,6 +73,7 @@ public class NetworkManager : MonoBehaviour
 
     int _mapSize = 0; // Default map size, can be adjusted later
 
+    ulong _lastProcessedBlockNumber = 0;
     async void Start()
     {
 
@@ -115,9 +116,9 @@ public class NetworkManager : MonoBehaviour
                 if (distance < 1f)
                 {
                     asteroid.Value.Collect();
-                    var address = _account.GetAccount().ToAccountId32().ToAddress();
-                    if (address == ship.Key)
-                        _uiManager.CollectScreenEffect();
+                    // var address = _account.GetAccount().ToAccountId32().ToAddress();
+                    // if (address == ship.Key)
+                    //     _uiManager.CollectScreenEffect();
                 }
             }
         }
@@ -140,6 +141,13 @@ public class NetworkManager : MonoBehaviour
         var blockNumber = block.Block.Header.Number;
         _blockNumberText.text = "Block number: " + blockNumber;
 
+        if (blockNumber <= _lastProcessedBlockNumber)
+        {
+            Debug.Log($"[UpdateState] Block {blockNumber} already processed, skipping");
+            return;
+        }
+        _lastProcessedBlockNumber = blockNumber;
+
         if (_mapSize == 0)
         {
             var mapSize = await _client.TemplateStorage.MapSize(null, CancellationToken.None);
@@ -161,7 +169,6 @@ public class NetworkManager : MonoBehaviour
 
         var accountId = _account.GetAccount().ToAccountId32();
         Debug.Log($"[NetworkManager] [UpdateState] Account ID: {accountId.ToAddress()}");
-        await LoadResources(accountId);
 
         //ActiveShips
         var myShip = await _client.TemplateStorage.ActiveShips(accountId, null, CancellationToken.None);
@@ -287,6 +294,23 @@ public class NetworkManager : MonoBehaviour
 
                         Debug.Log($"[NetworkManager] GameStarted for {gameOwner} at {startCoord.X}, {startCoord.Y}");
                         break;
+                    case Event.AsteroidCollected:
+                        var tuple = templateEvent.Value2 as BaseTuple<AccountId32, Coord, EnumAsteroidKind, U32>;
+
+                        var address = (tuple.Value[0] as AccountId32).ToAddress();
+                        //var pos = tuple.Value[1] as Coord;
+                        var resource = tuple.Value[2] as EnumAsteroidKind;
+                        // var amount = (tuple.Value[3] as U32).ConvertTo<int>();
+
+                        if (address == _account.GetAccount().ToAccountId32().ToAddress())
+                        {
+                            await LoadResources(accountId);
+
+
+                            _uiManager.CollectScreenEffect();
+
+                        }
+                        break;
 
                 }
             }
@@ -300,10 +324,14 @@ public class NetworkManager : MonoBehaviour
 
         var accountAddress = _account.GetAccount().ToAccountId32().ToAddress();
 
-        if (accountAddress == owner)
-            _cameraController.SetTarget(ship.transform);
-
         var shipEntity = ship.GetComponent<ShipEntity>();
+
+        if (accountAddress == owner)
+        {
+            _cameraController.SetTarget(ship.transform);
+            shipEntity.LocalPlayer = true;
+        }
+
         shipEntity.SetSkin(nftSkin.ConvertTo<int>());
         // shipEntity.Lounch(startCoord.ToVector3(), startCoord.ToVector3(),
         //                                          blockNumber.ConvertTo<int>(),
@@ -417,9 +445,10 @@ public class NetworkManager : MonoBehaviour
 
         var playerShip = _shipsInSpace[address];
         if (!playerShip.Idle) return;
+        if (_gameCallsService == null) return;
 
         Debug.Log("[NetworkManager] [LounchStarship] " + coord);
-        await _gameCallsService.CallDoSomethingAsync(coord, (status) =>
+        await _gameCallsService.CallStartFlightAsync(coord, (status) =>
         {
             if (playerShip.Idle)
                 _energySlider.FillOverTime(2.5f);
@@ -503,7 +532,7 @@ public class NetworkManager : MonoBehaviour
             // on probability or luck.
             var asteroidView = _asteroids[coord];
             asteroidView.Collect();
-            _uiManager.CollectScreenEffect();
+            // _uiManager.CollectScreenEffect();
 
             _gameCallsService.TryToCollectResourceAsync(coord).ContinueWith(task =>
             {

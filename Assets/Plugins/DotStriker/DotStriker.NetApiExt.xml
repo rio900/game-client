@@ -2220,9 +2220,9 @@
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.do_something">
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.start_flight">
             <summary>
-            >> do_something
+            >> start_flight
             </summary>
         </member>
         <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.cause_error">
@@ -2322,6 +2322,11 @@
         <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.GameStarted">
             <summary>
             >> GameStarted
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.AsteroidCollected">
+            <summary>
+            >> AsteroidCollected
             </summary>
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumEvent">
@@ -6053,9 +6058,9 @@
             >> TemplateCalls
             </summary>
         </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.DoSomething(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord)">
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.StartFlight(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord)">
             <summary>
-            >> do_something
+            >> start_flight
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
