@@ -58,7 +58,6 @@ public class NetworkManager : MonoBehaviour
 
     [SerializeField] GridRenderer _gridRenderer;
 
-
     SubstrateClientExt _client;
 
     ulong _updateNumber = 0;
@@ -447,11 +446,12 @@ public class NetworkManager : MonoBehaviour
         if (!playerShip.Idle) return;
         if (_gameCallsService == null) return;
 
+        _energySlider.FillOverTime(2.5f);
+
         Debug.Log("[NetworkManager] [LounchStarship] " + coord);
         await _gameCallsService.CallStartFlightAsync(coord, (status) =>
         {
-            if (playerShip.Idle)
-                _energySlider.FillOverTime(2.5f);
+
         });
     }
 
@@ -550,6 +550,7 @@ public class NetworkManager : MonoBehaviour
         }
         else
         {
+
             LaunchStarship(coord);
         }
     }

@@ -22,7 +22,17 @@ public class PlaneClickDetector : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 mousePosition = Input.mousePosition;
+
+
+            if (mousePosition.x < 0 || mousePosition.y < 0 ||
+                mousePosition.x > Screen.width || mousePosition.y > Screen.height)
+            {
+                Debug.Log("Click outside screen bounds – ignored");
+                return;
+            }
+
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, planeLayer))
             {
