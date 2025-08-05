@@ -340,7 +340,7 @@
           }
         }
       },
-      "Substrate.NET.API/0.9.24": {
+      "Substrate.NET.API/0.9.24-rc8": {
         "dependencies": {
           "Blake2Core": "1.0.0",
           "Chaos.NaCl.Standard": "1.0.0",
@@ -545,7 +545,7 @@
       },
       "DotStriker.NetApiExt/1.0.0": {
         "dependencies": {
-          "Substrate.NET.API": "0.9.24"
+          "Substrate.NET.API": "0.9.24-rc8"
         },
         "runtime": {
           "DotStriker.NetApiExt.dll": {}
@@ -699,12 +699,12 @@
       "path": "strobenet/0.0.2.4",
       "hashPath": "strobenet.0.0.2.4.nupkg.sha512"
     },
-    "Substrate.NET.API/0.9.24": {
+    "Substrate.NET.API/0.9.24-rc8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0x+GgXSvhWObJja4ll4bzoJdZK6V+meXNzNceR+nFoPxjvWfx7iKMy1v7eC5HDxvEQQ1tFideXt3BCTeMylOpw==",
-      "path": "substrate.net.api/0.9.24",
-      "hashPath": "substrate.net.api.0.9.24.nupkg.sha512"
+      "sha512": "sha512-Ua1NF1G2c8bJ9g3KIzXjPVAUhAGBIGXZUHT0BMDB4oxXs3ZUEgr8SsLwjs1hkLFUxL+sadO+PoObEU/f+AoQtA==",
+      "path": "substrate.net.api/0.9.24-rc8",
+      "hashPath": "substrate.net.api.0.9.24-rc8.nupkg.sha512"
     },
     "Substrate.NET.Schnorrkel/1.2.2": {
       "type": "package",

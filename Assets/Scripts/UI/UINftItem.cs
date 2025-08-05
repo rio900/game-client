@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using DotStriker.NetApiExt.Generated.Model.pallet_template;
+using DotStriker.NetApiExt.Generated.Model.pallet_dot_striker;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

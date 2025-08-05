@@ -1773,6 +1773,294 @@
         <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_balances.types.ReserveData.Decode(System.Byte[],System.Int32@)">
             <inheritdoc/>
         </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord">
+            <summary>
+            >> 45 - Composite[pallet_dot_striker.Coord]
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord.X">
+            <summary>
+            >> x
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord.Y">
+            <summary>
+            >> y
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind">
+            <summary>
+            >> AsteroidKind
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Energy">
+            <summary>
+            >> Energy
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Gold">
+            <summary>
+            >> Gold
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Dot0">
+            <summary>
+            >> Dot0
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Dot1">
+            <summary>
+            >> Dot1
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Dot2">
+            <summary>
+            >> Dot2
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Nft0">
+            <summary>
+            >> Nft0
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Nft1">
+            <summary>
+            >> Nft1
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.AsteroidKind.Nft2">
+            <summary>
+            >> Nft2
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.EnumAsteroidKind">
+            <summary>
+            >> 44 - Variant[pallet_dot_striker.AsteroidKind]
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight">
+            <summary>
+            >> 125 - Composite[pallet_dot_striker.Flight]
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight.From">
+            <summary>
+            >> from
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight.To">
+            <summary>
+            >> to
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight.Start">
+            <summary>
+            >> start
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight.End">
+            <summary>
+            >> end
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Flight.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Call">
+            <summary>
+            >> Call
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Call.start_flight">
+            <summary>
+            >> start_flight
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Call.try_to_collect_resource">
+            <summary>
+            >> try_to_collect_resource
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Call.start_game">
+            <summary>
+            >> start_game
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Call.admin_set_map_size">
+            <summary>
+            >> admin_set_map_size
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Call.admin_set_max_asteroids_count">
+            <summary>
+            >> admin_set_max_asteroids_count
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Call.admin_reset_game">
+            <summary>
+            >> admin_reset_game
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.EnumCall">
+            <summary>
+            >> 122 - Variant[pallet_dot_striker.pallet.Call]
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.EnumCall.#ctor">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error">
+            <summary>
+            >> Error
+            The `Error` enum of this pallet.
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.StorageOverflow">
+            <summary>
+            >> StorageOverflow
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.FlightAlreadyInProgress">
+            <summary>
+            >> FlightAlreadyInProgress
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.NoActiveShip">
+            <summary>
+            >> NoActiveShip
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.ShipInFlight">
+            <summary>
+            >> ShipInFlight
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.TooFarFromResource">
+            <summary>
+            >> TooFarFromResource
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.InvalidCoordinates">
+            <summary>
+            >> InvalidCoordinates
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.PlayerAlreadyHasActiveShip">
+            <summary>
+            >> PlayerAlreadyHasActiveShip
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.InvalidNftSkin">
+            <summary>
+            >> InvalidNftSkin
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Error.MissingNftForSkin">
+            <summary>
+            >> MissingNftForSkin
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.EnumError">
+            <summary>
+            >> 128 - Variant[pallet_dot_striker.pallet.Error]
+            The `Error` enum of this pallet.
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event">
+            <summary>
+            >> Event
+            The `Event` enum of this pallet
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event.AsteroidSpawned">
+            <summary>
+            >> AsteroidSpawned
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event.AsteroidRemoved">
+            <summary>
+            >> AsteroidRemoved
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event.FlightStarted">
+            <summary>
+            >> FlightStarted
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event.EnergyDepleted">
+            <summary>
+            >> EnergyDepleted
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event.GameStarted">
+            <summary>
+            >> GameStarted
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event.AsteroidCollected">
+            <summary>
+            >> AsteroidCollected
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.EnumEvent">
+            <summary>
+            >> 43 - Variant[pallet_dot_striker.pallet.Event]
+            The `Event` enum of this pallet
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.EnumEvent.#ctor">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Starship">
+            <summary>
+            >> 126 - Composite[pallet_dot_striker.Starship]
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Starship.Pos">
+            <summary>
+            >> pos
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Starship.Energy">
+            <summary>
+            >> energy
+            </summary>
+        </member>
+        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Starship.NftSkin">
+            <summary>
+            >> nft_skin
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Starship.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Starship.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Starship.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_grandpa.StoredState">
             <summary>
             >> StoredState
@@ -2106,269 +2394,6 @@
             Initializes a new instance of the class.
             </summary>
         </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.Coord">
-            <summary>
-            >> 45 - Composite[pallet_template.Coord]
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Coord.X">
-            <summary>
-            >> x
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Coord.Y">
-            <summary>
-            >> y
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Coord.TypeName">
-            <inheritdoc/>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Coord.Encode">
-            <inheritdoc/>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Coord.Decode(System.Byte[],System.Int32@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind">
-            <summary>
-            >> AsteroidKind
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Energy">
-            <summary>
-            >> Energy
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Gold">
-            <summary>
-            >> Gold
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Dot0">
-            <summary>
-            >> Dot0
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Dot1">
-            <summary>
-            >> Dot1
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Dot2">
-            <summary>
-            >> Dot2
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Nft0">
-            <summary>
-            >> Nft0
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Nft1">
-            <summary>
-            >> Nft1
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.AsteroidKind.Nft2">
-            <summary>
-            >> Nft2
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.EnumAsteroidKind">
-            <summary>
-            >> 44 - Variant[pallet_template.AsteroidKind]
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight">
-            <summary>
-            >> 125 - Composite[pallet_template.Flight]
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.From">
-            <summary>
-            >> from
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.To">
-            <summary>
-            >> to
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.Start">
-            <summary>
-            >> start
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.End">
-            <summary>
-            >> end
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.TypeName">
-            <inheritdoc/>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.Encode">
-            <inheritdoc/>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Flight.Decode(System.Byte[],System.Int32@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call">
-            <summary>
-            >> Call
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.start_flight">
-            <summary>
-            >> start_flight
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.cause_error">
-            <summary>
-            >> cause_error
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.try_to_collect_resource">
-            <summary>
-            >> try_to_collect_resource
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.start_game">
-            <summary>
-            >> start_game
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.admin_set_map_size">
-            <summary>
-            >> admin_set_map_size
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.admin_set_max_asteroids_count">
-            <summary>
-            >> admin_set_max_asteroids_count
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Call.admin_reset_game">
-            <summary>
-            >> admin_reset_game
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumCall">
-            <summary>
-            >> 122 - Variant[pallet_template.pallet.Call]
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumCall.#ctor">
-            <summary>
-            Initializes a new instance of the class.
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Error">
-            <summary>
-            >> Error
-            The `Error` enum of this pallet.
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Error.NoneValue">
-            <summary>
-            >> NoneValue
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Error.StorageOverflow">
-            <summary>
-            >> StorageOverflow
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumError">
-            <summary>
-            >> 128 - Variant[pallet_template.pallet.Error]
-            The `Error` enum of this pallet.
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event">
-            <summary>
-            >> Event
-            The `Event` enum of this pallet
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.TestEvent">
-            <summary>
-            >> TestEvent
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.AsteroidSpawned">
-            <summary>
-            >> AsteroidSpawned
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.AsteroidRemoved">
-            <summary>
-            >> AsteroidRemoved
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.FlightStarted">
-            <summary>
-            >> FlightStarted
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.EnergyDepleted">
-            <summary>
-            >> EnergyDepleted
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.GameStarted">
-            <summary>
-            >> GameStarted
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event.AsteroidCollected">
-            <summary>
-            >> AsteroidCollected
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumEvent">
-            <summary>
-            >> 43 - Variant[pallet_template.pallet.Event]
-            The `Event` enum of this pallet
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.EnumEvent.#ctor">
-            <summary>
-            Initializes a new instance of the class.
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_template.Starship">
-            <summary>
-            >> 126 - Composite[pallet_template.Starship]
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Starship.Pos">
-            <summary>
-            >> pos
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Starship.Energy">
-            <summary>
-            >> energy
-            </summary>
-        </member>
-        <member name="P:DotStriker.NetApiExt.Generated.Model.pallet_template.Starship.NftSkin">
-            <summary>
-            >> nft_skin
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Starship.TypeName">
-            <inheritdoc/>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Starship.Encode">
-            <inheritdoc/>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Model.pallet_template.Starship.Decode(System.Byte[],System.Int32@)">
-            <inheritdoc/>
-        </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.pallet_timestamp.pallet.Call">
             <summary>
             >> Call
@@ -2522,9 +2547,9 @@
             >> Sudo
             </summary>
         </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeCall.Template">
+        <member name="F:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeCall.DotStriker">
             <summary>
-            >> Template
+            >> DotStriker
             </summary>
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.EnumRuntimeCall">
@@ -2567,9 +2592,9 @@
             >> Sudo
             </summary>
         </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeEvent.Template">
+        <member name="F:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeEvent.DotStriker">
             <summary>
-            >> Template
+            >> DotStriker
             </summary>
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Model.solochain_template_runtime.EnumRuntimeEvent">
@@ -5000,6 +5025,272 @@
             The delta cannot be zero.
             </summary>
         </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage">
+            <summary>
+            >> DotStrikerStorage
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.#ctor(DotStriker.NetApiExt.Generated.SubstrateClientExt)">
+            <summary>
+            >> DotStrikerStorage Constructor
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.MapSizeParams">
+            <summary>
+            >> MapSizeParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.MapSizeDefault">
+            <summary>
+            >> MapSizeDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.MapSize(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> MapSize
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.MaxAsteroidsCountParams">
+            <summary>
+            >> MaxAsteroidsCountParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.MaxAsteroidsCountDefault">
+            <summary>
+            >> MaxAsteroidsCountDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.MaxAsteroidsCount(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> MaxAsteroidsCount
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.PlayersCountParams">
+            <summary>
+            >> PlayersCountParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.PlayersCountDefault">
+            <summary>
+            >> PlayersCountDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.PlayersCount(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> PlayersCount
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.AsteroidsParams(DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord)">
+            <summary>
+            >> AsteroidsParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.AsteroidsDefault">
+            <summary>
+            >> AsteroidsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.Asteroids(DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> Asteroids
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.FlightsParams(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> FlightsParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.FlightsDefault">
+            <summary>
+            >> FlightsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.Flights(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> Flights
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.ActiveShipsParams(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> ActiveShipsParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.ActiveShipsDefault">
+            <summary>
+            >> ActiveShipsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.ActiveShips(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> ActiveShips
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.AccountResourcesParams(Substrate.NetApi.Model.Types.Base.BaseTuple{DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.EnumAsteroidKind})">
+            <summary>
+            >> AccountResourcesParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.AccountResourcesDefault">
+            <summary>
+            >> AccountResourcesDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.AccountResources(Substrate.NetApi.Model.Types.Base.BaseTuple{DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.EnumAsteroidKind},System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> AccountResources
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.DotPrizePoolParams">
+            <summary>
+            >> DotPrizePoolParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.DotPrizePoolDefault">
+            <summary>
+            >> DotPrizePoolDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.DotPrizePool(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> DotPrizePool
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.DotEmittedTotalParams">
+            <summary>
+            >> DotEmittedTotalParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.DotEmittedTotalDefault">
+            <summary>
+            >> DotEmittedTotalDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.DotEmittedTotal(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> DotEmittedTotal
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.LastNftSpawnBlockParams">
+            <summary>
+            >> LastNftSpawnBlockParams
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.LastNftSpawnBlockDefault">
+            <summary>
+            >> LastNftSpawnBlockDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerStorage.LastNftSpawnBlock(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> LastNftSpawnBlock
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Storage.DotStrikerCalls">
+            <summary>
+            >> DotStrikerCalls
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerCalls.StartFlight(DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord)">
+            <summary>
+            >> start_flight
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerCalls.TryToCollectResource(DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord)">
+            <summary>
+            >> try_to_collect_resource
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerCalls.StartGame(DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.Coord,Substrate.NetApi.Model.Types.Primitive.U32)">
+            <summary>
+            >> start_game
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerCalls.AdminSetMapSize(Substrate.NetApi.Model.Types.Primitive.U32)">
+            <summary>
+            >> admin_set_map_size
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerCalls.AdminSetMaxAsteroidsCount(Substrate.NetApi.Model.Types.Primitive.U32)">
+            <summary>
+            >> admin_set_max_asteroids_count
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:DotStriker.NetApiExt.Generated.Storage.DotStrikerCalls.AdminResetGame">
+            <summary>
+            >> admin_reset_game
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Storage.DotStrikerConstants">
+            <summary>
+            >> DotStrikerConstants
+            </summary>
+        </member>
+        <member name="T:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors">
+            <summary>
+            >> DotStrikerErrors
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.StorageOverflow">
+            <summary>
+            >> StorageOverflow
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.FlightAlreadyInProgress">
+            <summary>
+            >> FlightAlreadyInProgress
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.NoActiveShip">
+            <summary>
+            >> NoActiveShip
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.ShipInFlight">
+            <summary>
+            >> ShipInFlight
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.TooFarFromResource">
+            <summary>
+            >> TooFarFromResource
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.InvalidCoordinates">
+            <summary>
+            >> InvalidCoordinates
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.PlayerAlreadyHasActiveShip">
+            <summary>
+            >> PlayerAlreadyHasActiveShip
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.InvalidNftSkin">
+            <summary>
+            >> InvalidNftSkin
+            </summary>
+        </member>
+        <member name="F:DotStriker.NetApiExt.Generated.Storage.DotStrikerErrors.MissingNftForSkin">
+            <summary>
+            >> MissingNftForSkin
+            </summary>
+        </member>
         <member name="T:DotStriker.NetApiExt.Generated.Storage.GrandpaStorage">
             <summary>
             >> GrandpaStorage
@@ -5867,259 +6158,6 @@
             The submitted code is not authorized.
             </summary>
         </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Storage.TemplateStorage">
-            <summary>
-            >> TemplateStorage
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.#ctor(DotStriker.NetApiExt.Generated.SubstrateClientExt)">
-            <summary>
-            >> TemplateStorage Constructor
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.SomethingParams">
-            <summary>
-            >> SomethingParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.SomethingDefault">
-            <summary>
-            >> SomethingDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.Something(System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> Something
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.MapSizeParams">
-            <summary>
-            >> MapSizeParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.MapSizeDefault">
-            <summary>
-            >> MapSizeDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.MapSize(System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> MapSize
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.MaxAsteroidsCountParams">
-            <summary>
-            >> MaxAsteroidsCountParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.MaxAsteroidsCountDefault">
-            <summary>
-            >> MaxAsteroidsCountDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.MaxAsteroidsCount(System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> MaxAsteroidsCount
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.PlayersCountParams">
-            <summary>
-            >> PlayersCountParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.PlayersCountDefault">
-            <summary>
-            >> PlayersCountDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.PlayersCount(System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> PlayersCount
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.AsteroidsParams(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord)">
-            <summary>
-            >> AsteroidsParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.AsteroidsDefault">
-            <summary>
-            >> AsteroidsDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.Asteroids(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord,System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> Asteroids
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.FlightsParams(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
-            <summary>
-            >> FlightsParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.FlightsDefault">
-            <summary>
-            >> FlightsDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.Flights(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> Flights
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.ActiveShipsParams(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
-            <summary>
-            >> ActiveShipsParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.ActiveShipsDefault">
-            <summary>
-            >> ActiveShipsDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.ActiveShips(DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> ActiveShips
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.AccountResourcesParams(Substrate.NetApi.Model.Types.Base.BaseTuple{DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,DotStriker.NetApiExt.Generated.Model.pallet_template.EnumAsteroidKind})">
-            <summary>
-            >> AccountResourcesParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.AccountResourcesDefault">
-            <summary>
-            >> AccountResourcesDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.AccountResources(Substrate.NetApi.Model.Types.Base.BaseTuple{DotStriker.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,DotStriker.NetApiExt.Generated.Model.pallet_template.EnumAsteroidKind},System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> AccountResources
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.DotPrizePoolParams">
-            <summary>
-            >> DotPrizePoolParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.DotPrizePoolDefault">
-            <summary>
-            >> DotPrizePoolDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.DotPrizePool(System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> DotPrizePool
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.DotEmittedTotalParams">
-            <summary>
-            >> DotEmittedTotalParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.DotEmittedTotalDefault">
-            <summary>
-            >> DotEmittedTotalDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.DotEmittedTotal(System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> DotEmittedTotal
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.LastNftSpawnBlockParams">
-            <summary>
-            >> LastNftSpawnBlockParams
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.LastNftSpawnBlockDefault">
-            <summary>
-            >> LastNftSpawnBlockDefault
-            Default value as hex string
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateStorage.LastNftSpawnBlock(System.String,System.Threading.CancellationToken)">
-            <summary>
-            >> LastNftSpawnBlock
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Storage.TemplateCalls">
-            <summary>
-            >> TemplateCalls
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.StartFlight(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord)">
-            <summary>
-            >> start_flight
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.CauseError">
-            <summary>
-            >> cause_error
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.TryToCollectResource(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord)">
-            <summary>
-            >> try_to_collect_resource
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.StartGame(DotStriker.NetApiExt.Generated.Model.pallet_template.Coord,Substrate.NetApi.Model.Types.Primitive.U32)">
-            <summary>
-            >> start_game
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.AdminSetMapSize(Substrate.NetApi.Model.Types.Primitive.U32)">
-            <summary>
-            >> admin_set_map_size
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.AdminSetMaxAsteroidsCount(Substrate.NetApi.Model.Types.Primitive.U32)">
-            <summary>
-            >> admin_set_max_asteroids_count
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="M:DotStriker.NetApiExt.Generated.Storage.TemplateCalls.AdminResetGame">
-            <summary>
-            >> admin_reset_game
-            Contains a variant per dispatchable extrinsic that this pallet has.
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Storage.TemplateConstants">
-            <summary>
-            >> TemplateConstants
-            </summary>
-        </member>
-        <member name="T:DotStriker.NetApiExt.Generated.Storage.TemplateErrors">
-            <summary>
-            >> TemplateErrors
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Storage.TemplateErrors.NoneValue">
-            <summary>
-            >> NoneValue
-            </summary>
-        </member>
-        <member name="F:DotStriker.NetApiExt.Generated.Storage.TemplateErrors.StorageOverflow">
-            <summary>
-            >> StorageOverflow
-            </summary>
-        </member>
         <member name="T:DotStriker.NetApiExt.Generated.Storage.TimestampStorage">
             <summary>
             >> TimestampStorage
@@ -6322,9 +6360,9 @@
             SudoStorage storage calls.
             </summary>
         </member>
-        <member name="F:DotStriker.NetApiExt.Generated.SubstrateClientExt.TemplateStorage">
+        <member name="F:DotStriker.NetApiExt.Generated.SubstrateClientExt.DotStrikerStorage">
             <summary>
-            TemplateStorage storage calls.
+            DotStrikerStorage storage calls.
             </summary>
         </member>
         <member name="T:DotStriker.NetApiExt.Generated.Types.Base.Arr20U8">

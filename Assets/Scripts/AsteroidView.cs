@@ -55,17 +55,17 @@ public class AsteroidView : MonoBehaviour
         if (_collectEffectPrefab != null)
         {
             //! I commented out these lines because they instantiate visual effects stored in the ExternalAssets folder. This folder is not included in the repository as it contains paid assets from the Asset Store, and sharing them would violate licensing terms.
-            // var collectEffect = Instantiate(_collectEffectPrefab);
-            // collectEffect.transform.position = transform.position;
-            // Destroy(collectEffect, 1f);
+            var collectEffect = Instantiate(_collectEffectPrefab);
+            collectEffect.transform.position = transform.position;
+            Destroy(collectEffect, 1f);
         }
 
         if (TypeId > 4 && _nftEffectPrefab != null)
         {
             //! I commented out these lines because they instantiate visual effects stored in the ExternalAssets folder. This folder is not included in the repository as it contains paid assets from the Asset Store, and sharing them would violate licensing terms.
-            // var nftEffect = Instantiate(_nftEffectPrefab);
-            // nftEffect.transform.position = transform.position;
-            // Destroy(nftEffect, 4f);
+            var nftEffect = Instantiate(_nftEffectPrefab);
+            nftEffect.transform.position = transform.position;
+            Destroy(nftEffect, 4f);
         }
     }
 }

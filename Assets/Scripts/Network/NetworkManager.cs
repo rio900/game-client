@@ -9,22 +9,26 @@ using Substrate.NetApi.Model.Extrinsics;
 using Substrate.NetApi.Model.Types;
 using DotStriker.Integration.Client;
 using DotStriker.NetApiExt.Generated.Model.solochain_template_runtime;
-using DotStriker.NetApiExt.Generated.Model.pallet_template.pallet;
-using Event = DotStriker.NetApiExt.Generated.Model.pallet_template.pallet.Event;
+using DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet;
+using Event = DotStriker.NetApiExt.Generated.Model.pallet_dot_striker.pallet.Event;
 using System.Linq;
 using Substrate.NetApi.Model.Types.Primitive;
 using TMPro;
 using Unity.VisualScripting;
 using Substrate.NetApi.Model.Types.Base;
-using DotStriker.NetApiExt.Generated.Model.pallet_template;
+using DotStriker.NetApiExt.Generated.Model.pallet_dot_striker;
 using DotStriker.NetApiExt.Generated.Model.sp_core.crypto;
 using DotStriker.Integration.Helper;
 
 public class NetworkManager : MonoBehaviour
 {
+    // #if UNITY_EDITOR
+    //     public string Url => "ws://127.0.0.1:9944";
+    // #else
+    //          public string Url => "ws://103.54.59.116:9944";
+    // #endif
     public string Url => "ws://127.0.0.1:9944";
-    // public string Url => "ws://104.225.143.227:9944";
-
+    //public string Url => "ws://103.54.59.116:9944";
     [SerializeField]
     AccountComponent _account;
 
@@ -75,7 +79,7 @@ public class NetworkManager : MonoBehaviour
     ulong _lastProcessedBlockNumber = 0;
     async void Start()
     {
-
+        Application.targetFrameRate = 120;
         _uiManager = FindAnyObjectByType<UIManager>();
         _client = new SubstrateClientExt(new Uri(Url),
                                         ChargeTransactionPayment.Default());
@@ -95,7 +99,7 @@ public class NetworkManager : MonoBehaviour
             Debug.Log("[NetworkManager] [UpdatePlayerCount] Client is null or disposed");
             return;
         }
-        var playerCount = await _client.TemplateStorage.PlayersCount(null, CancellationToken.None);
+        var playerCount = await _client.DotStrikerStorage.PlayersCount(null, CancellationToken.None);
         if (playerCount != null)
             _uiManager.SetPlayerCount(playerCount.ConvertTo<int>());
     }
@@ -149,7 +153,7 @@ public class NetworkManager : MonoBehaviour
 
         if (_mapSize == 0)
         {
-            var mapSize = await _client.TemplateStorage.MapSize(null, CancellationToken.None);
+            var mapSize = await _client.DotStrikerStorage.MapSize(null, CancellationToken.None);
             if (mapSize != null)
             {
                 _mapSize = mapSize.ConvertTo<int>();
@@ -170,7 +174,7 @@ public class NetworkManager : MonoBehaviour
         Debug.Log($"[NetworkManager] [UpdateState] Account ID: {accountId.ToAddress()}");
 
         //ActiveShips
-        var myShip = await _client.TemplateStorage.ActiveShips(accountId, null, CancellationToken.None);
+        var myShip = await _client.DotStrikerStorage.ActiveShips(accountId, null, CancellationToken.None);
         if (myShip != null)
         {
             Debug.Log($"Storage 'ActiveShips' = {myShip.Energy}");
@@ -187,19 +191,12 @@ public class NetworkManager : MonoBehaviour
             var runtimeEvent = record.Event;
             Debug.Log($"[NetworkManager] [UpdateState] Enevent: {runtimeEvent}");
 
-            if (runtimeEvent.Value == RuntimeEvent.Template)
+            if (runtimeEvent.Value == RuntimeEvent.DotStriker)
             {
                 var templateEvent = runtimeEvent.Value2 as EnumEvent;
 
                 switch (templateEvent.Value)
                 {
-                    case Event.TestEvent:
-                        var tuple1 = templateEvent.Value2 as U32;
-                        _numberInsideTestEventText.text = "Test event:" + tuple1.ConvertTo<int>().ToString();
-
-                        Debug.Log($"[NetworkManager] [UpdateState] TestEvent {tuple1}");
-                        break;
-
                     case Event.AsteroidSpawned:
                         var tuple2 = templateEvent.Value2 as BaseTuple<EnumAsteroidKind, Coord>;
                         Debug.Log($"[NetworkManager] [UpdateState] AsteroidSpawned {(tuple2?.Value[0] as EnumAsteroidKind).ToSafeString()}");
@@ -352,7 +349,7 @@ public class NetworkManager : MonoBehaviour
             asteroidKindEnum.Create(item);
             var energyKey = new BaseTuple<AccountId32, EnumAsteroidKind>(accountId, asteroidKindEnum);
 
-            var result = await _client.TemplateStorage.AccountResources(energyKey, null, CancellationToken.None);
+            var result = await _client.DotStrikerStorage.AccountResources(energyKey, null, CancellationToken.None);
             if (result != null)
             {
                 Debug.Log($"Storage 'AccountResources energy' = {result.Value}");
@@ -381,7 +378,7 @@ public class NetworkManager : MonoBehaviour
             asteroidKindEnum.Create(item);
             var energyKey = new BaseTuple<AccountId32, EnumAsteroidKind>(accountId, asteroidKindEnum);
 
-            var result = await _client.TemplateStorage.AccountResources(energyKey, null, CancellationToken.None);
+            var result = await _client.DotStrikerStorage.AccountResources(energyKey, null, CancellationToken.None);
             if (result != null)
             {
                 Debug.Log($"Storage 'AccountResources nft {item}' = {result.Value}");
@@ -553,6 +550,25 @@ public class NetworkManager : MonoBehaviour
 
             LaunchStarship(coord);
         }
+    }
+
+    public void SetMapSize(int size)
+    {
+        _gameCallsService = new GameCallsService(_client, _account.GetAccount());
+
+        Debug.Log($"[NetworkManager] [SetMapSize] Setting map size to {size}");
+        _gameCallsService.CallAdminSetMapSizeAsync((uint)size).ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError($"[NetworkManager] [SetMapSize] Error setting map size: {task.Exception}");
+                }
+                else
+                {
+                    Debug.Log("[NetworkManager] [SetMapSize] Map size set successfully");
+                }
+            });
+
     }
 }
 

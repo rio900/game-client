@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using DotStriker.NetApiExt.Generated.Model.pallet_template;
+using DotStriker.NetApiExt.Generated.Model.pallet_dot_striker;
 using UnityEngine;
 
 public class ShipEntity : MonoBehaviour
@@ -92,7 +92,7 @@ public class ShipEntity : MonoBehaviour
         _from = from;
         _to = to;
 
-        _travelDuration = Mathf.Abs(_blockDifference) * 2f;
+        _travelDuration = Mathf.Abs(_blockDifference) * 1f;
         _launchTime = Time.time;
 
         // Вычисляем контрольную точку для дуги вверх (можно изменить направление)

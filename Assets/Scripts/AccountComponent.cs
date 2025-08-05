@@ -29,7 +29,7 @@ public class AccountComponent : MonoBehaviour
     void Start()
     {
         _deviceId = SystemInfo.deviceUniqueIdentifier;
-        SelectAlice();
+        SelectDeviceIdAcc();
     }
 
     public void SelectAlice()
